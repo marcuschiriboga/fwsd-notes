@@ -6,47 +6,48 @@ import { Route, Routes, Link, useNavigate } from "react-router-dom";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
+import { Navbar } from "./components/navbar/Navbar";
+import {Logout} from "./components/Logout";
+import { ProfilePage } from "./pages/ProfilePage";
+
 
 const initialFormData = {
   email: "",
   password: "",
 };
 
-// const inputChange = (e) => {
-//   const { name, value } = e.target;
-//   setFormData((data) => ({
-//     ...data,
-//     [name]: value,
-//   })); 
-// }
 const App = () => {
   const [formData, setFormData] = useState(initialFormData);
-  const [showLogin, setShowLogin] = useState(false);
+  const [user, setUser] = useState({});
   const navigate = useNavigate()
   const inputChange = (e) => {
     const { name, value } = e.target;
-    console.log(name, value)
     setFormData((data) => ({
       ...data,
       [name]: value,
     })); 
-    console.log(formData)
   }
 
   let submitForm = (e) => {
     e.preventDefault()
-    if (formData.email != "marcus" && formData.password != "password") {
+    if (formData.email != "Roland" && formData.password != "1234") {
       setFormData(initialFormData)
       navigate("/")
       return alert("wrong password")
     }
     alert("thanks for your submission "+formData.email+" your password is "+formData.password)
+    setUser({
+      email: formData.email,
+      password: formData.password
+    })
     setFormData(initialFormData)
     navigate("/")
   }
 
   return (
     <>
+      <Navbar user={user}/>
+      <br/>
       <Routes>
         {/* 
           Within Routes, we can render any child Route components. Each 
@@ -58,15 +59,17 @@ const App = () => {
                 when the currently active route matches the Route component's
                 path attribute
         */}
-        <Route path="/" element={<HomePage/>} />
+        <Route path="/" element={<HomePage user={user}/>} />
         <Route path="login" element={<Login inputChange={inputChange} submitForm={submitForm} />} />
+        <Route path="logout" element={<Logout setUser={setUser}/>} />
+        <Route path="profile" element={<ProfilePage user={user}/>} />
+
       </Routes>
-      <div>
+      <footer>
         <Link to="login">Need to Log In? </Link>
         <Link to="">Return Home</Link>
-      </div>
-      {/* <div className="login field">{showLogin && <Login />}</div> */}
-      {/* <button onClick={() => setShowLogin(!showLogin)}>Toggle Login</button> */}
+      </footer>
+      
     </>
   );
 };

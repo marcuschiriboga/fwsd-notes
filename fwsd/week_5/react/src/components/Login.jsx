@@ -28,12 +28,6 @@ const Login = ({ inputChange, submitForm }) => {
   );
 };
 
-const logOut = user => {
-  // delete user;
-  let navigate = useNavigate();
-  navigate("/");
-};
-
 export default Login;
 
 // Login.

@@ -1,0 +1,14 @@
+.navbar {
+}
+
+nav {
+    position: fixed;
+    top: 0px;
+    outline: 2px solid grey;
+}
+
+
+li {
+    display: inline-block;
+    margin: 5px;
+}
