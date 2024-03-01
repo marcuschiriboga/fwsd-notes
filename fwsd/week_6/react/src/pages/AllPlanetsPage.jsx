@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import {Link} from 'react-router-dom'
+import {Link, Outlet} from 'react-router-dom'
 
 // display all charcters
 export const AllPlanetsPage = () => {
@@ -15,6 +15,7 @@ export const AllPlanetsPage = () => {
 
   return (
     <div>
+      <Outlet></Outlet>
       {data && data.results.map((plan,i) => (
         <div key={i}>
           {/* get id out of url string to create link */}

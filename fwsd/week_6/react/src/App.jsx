@@ -1,12 +1,12 @@
 import { useState, useEffect } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, Outlet } from "react-router-dom";
 import { AllCharactersPage } from "./pages/AllCharacterPage";
 import { CharacterPage } from "./pages/CharacterPage";
-import { AllPlanetsPage } from "./pages/AllPlanetsPage"
-import { PlanetPage } from "./pages/PlanetPage"
+import { AllPlanetsPage } from "./pages/AllPlanetsPage";
+import { PlanetPage } from "./pages/PlanetPage";
 import { Header } from "./components/Header";
 import { HomePage } from "./pages/Homepage";
-import {Link} from "react-router-dom"
+import { Link } from "react-router-dom";
 import reactLogo from "./assets/react.svg";
 import viteLogo from "/vite.svg";
 import "./App.css";
@@ -17,19 +17,20 @@ function App() {
   let api = "https://swapi.dev/api/";
   let mainContentStyles = {
     backgroundColor: "yellow",
-    outline: "2px solid black", 
-    font: ""
-  } 
+    outline: "2px solid black",
+    font: "",
+  };
   let footerContentStyles = {
     backgroundColor: "yellow",
-    outline: "2px solid black", 
-    fontSize: "25px"
-  } 
+    outline: "2px solid black",
+    fontSize: "25px",
+  };
 
   useEffect(() => {
     fetch(api + "people/1")
       .then(res => res.json())
-      .then(info => setData(info)).catch(e=>console.log(e));
+      .then(info => setData(info))
+      .catch(e => console.log(e));
   }, []);
 
   // page for people
@@ -57,14 +58,29 @@ function App() {
       {/* Bootstrap css framework */}
       {/* mediaquery adjust the layout based on the size of the screen */}
       {/* sass extends CSS with features like variables and nesting */}
-      <Header/>
-      
+      <Header />
+
       <Routes>
-        <Route path="/" element={<HomePage/>}/>
-        <Route path="characters" element={<AllCharactersPage />}></Route>
-        <Route path="characters/:id" element={<CharacterPage styles={mainContentStyles} secondaryStyling={footerContentStyles} thirdprop={"hi, Roland!"}/>}></Route>
-        <Route path="planets" element={<AllPlanetsPage />}></Route>
-        <Route path="planets/:id" element={<PlanetPage styles={mainContentStyles}/>}></Route>
+        <Route path="/" element={<HomePage />} />
+        <Route path="characters" element={<AllCharactersPage />}>
+          <Route
+            path=":id"
+            element={
+              <CharacterPage
+                styles={mainContentStyles}
+                secondaryStyling={footerContentStyles}
+                thirdprop={"hi, Roland!"}
+              />
+            }
+          ></Route>
+        </Route>
+        <Route path="planets" element={<AllPlanetsPage />}>
+          <Route
+            path=":id"
+            element={<PlanetPage styles={mainContentStyles} />}
+          ></Route>
+        </Route>
+        <Route path="spaceship" element={<spaceshipPage />}></Route>
       </Routes>
 
       <footer style={footerContentStyles}>
