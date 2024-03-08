@@ -1,0 +1,24 @@
+{
+  "name": "server",
+  "private": true,
+  "version": "0.1.0",
+  "description": "Follow the instructions provided on Kenzie Canvas for this assignment.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "nodemon --exec babel-node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@babel/core": "^7.24.0",
+    "@babel/node": "^7.23.9",
+    "@babel/preset-env": "^7.24.0",
+    "cors": "^2.8.5",
+    "express": "^4.18.3"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
